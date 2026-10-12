@@ -1,51 +1,105 @@
 # Scanwell
 
-A free document scanner for Android. No watermark, no page limit, no account, no ads.
+**A document scanner for Android. No watermark, no page limit, no ads, no account.**
 
-## What it does
+Scanwell turns your phone into a scanner. Capture paper documents, save them as clean PDFs, copy the text out of them, and keep everything organized on your phone.
 
-- Scans paper with automatic edge detection, cropping and filters (Google ML Kit document scanner)
-- Keeps scans in a library with search, folders, rename and delete
-- Reads the text on each page so you can copy it and search inside scans
-- Exports PDF (three file sizes) or JPEG, to share or to save on the phone
-- Edits pages after scanning: add, reorder, delete
-- ID card mode: front and back on one A4 page
-- "Scan" shortcut when you long-press the app icon
+<!-- Screenshots: put 3 or 4 phone screenshots in a docs/screenshots folder, then uncomment the line below. -->
+<!--
+<p align="center">
+  <img src="docs/screenshots/library.png" width="220" alt="Library">
+  <img src="docs/screenshots/document.png" width="220" alt="A scanned document">
+  <img src="docs/screenshots/text.png" width="220" alt="Text read from a scan">
+</p>
+-->
 
-## Open and run it
+## Features
 
-1. Install Android Studio (latest stable).
-2. File > Open, choose this folder (the one containing `settings.gradle.kts`).
-3. Wait for "Gradle sync" to finish. The first time downloads a lot and can take 10 to 20 minutes.
-4. Plug in an Android phone with USB debugging on, then press the green Run button.
+- **Scan:** automatic edge detection, cropping and image filters. You can also import photos from your gallery.
+- **Export:** share or save as PDF or JPEG, with no watermark. Choose from three PDF sizes for email and upload limits.
+- **Text recognition:** copy or share the text on any page.
+- **Search:** find a scan by its name or by any word printed inside it.
+- **Organize:** rename scans and file them in folders.
+- **Edit pages:** add more pages to a scan, reorder them, or delete them.
+- **ID card mode:** scan the front and back of a card onto one A4 page, ready to print.
+- **Quick scan:** long-press the app icon and choose **Scan** to go straight to the camera.
 
-The full walkthrough, from installing the tools to publishing on Google Play, is in the guide that came with this project.
+## Download
 
-## Where things are
+Get the latest APK from the [Releases](../../releases) page.
 
-| Path | What is in it |
+To install it, open the APK on your phone. If Android asks, allow installs from the app you opened it with. Google Play Protect may warn you because the app isn't on the Play Store yet; choose to install anyway.
+
+**Requirements**
+- Android 8.0 or newer
+- Google Play services, which handles the scanner and the text reader
+- At least 1.7 GB of RAM
+- Internet the first time you scan or read text, while Google Play services downloads those parts. After that, Scanwell works offline.
+
+## Privacy
+
+- Your scans are stored only on your phone, in the app's private storage.
+- Scanwell has no accounts, no ads, no analytics of its own, and no servers.
+- Scanning and text recognition run on the phone through [Google ML Kit](https://developers.google.com/ml-kit). ML Kit sends Google some technical information, such as the device model and performance data, for diagnostics. See Google's [ML Kit data disclosure](https://developers.google.com/ml-kit/android-data-disclosure).
+- Uninstalling Scanwell deletes your scans, so export anything you want to keep.
+
+## Build it yourself
+
+You need [Android Studio](https://developer.android.com/studio) (Quail 2 or newer) and an Android phone with Google Play.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/Scanwell.git
+   ```
+2. In Android Studio, choose **Open** and select the `Scanwell` folder.
+3. Wait for Gradle sync to finish. The first sync downloads several gigabytes and can take 10 to 20 minutes.
+4. Turn on USB debugging on your phone, plug it in, and press **Run**.
+
+Use a real phone rather than the emulator, since the scanner needs a real camera.
+
+To build a release APK, choose **Build > Generate Signed Bundle/APK**, select **APK**, and sign it with your own key.
+
+### Tests
+
+The PDF writer and the helper code have unit tests that run on your computer:
+
+```bash
+./gradlew test
+```
+
+Or right-click `app/src/test/java/com/scanwell/app` in Android Studio and choose **Run Tests**.
+
+## How it works
+
+| Folder | What it does |
 | --- | --- |
-| `app/build.gradle.kts` | App ID, version number, libraries |
-| `gradle/libs.versions.toml` | Every version number in one place |
-| `app/src/main/AndroidManifest.xml` | The app's declaration to Android |
-| `app/src/main/java/com/scanwell/app/MainActivity.kt` | The app's window; starts the scanner |
-| `.../MainViewModel.kt` | The app's logic: saving, exporting, reading text |
-| `.../ui/` | The screens (library, document, page viewer, dialogs) |
-| `.../data/` | How scans are stored on the phone |
-| `.../pdf/` | The PDF writer |
-| `.../scan/` | Importing pages, ID card mode, text reading |
-| `.../share/` | Sharing to other apps |
-| `app/src/main/res/` | Icons, app name, theme |
-| `app/src/test/` | Automatic tests for the PDF writer and helpers |
+| `ui/` | The screens, built with Jetpack Compose |
+| `MainViewModel.kt` | The app's logic: saving, exporting and reading text |
+| `data/` | Stores each scan as JPEG pages plus a small JSON file |
+| `pdf/` | A small PDF writer that places the JPEG pages into the PDF as they are, so files stay small and lose no quality |
+| `scan/` | Imports scanned pages, builds ID card pages, reads text |
+| `share/` | Shares files with other apps |
 
-## Make it yours
+All paths are under `app/src/main/java/com/scanwell/app/`.
 
-- **App name:** `app/src/main/res/values/strings.xml`, the `app_name` line. Also the title in `ui/LibraryScreen.kt`.
-- **App ID:** `applicationId` in `app/build.gradle.kts`. Change it before your first upload to Google Play; it is permanent after that. Leave `namespace` alone.
-- **Icon:** `app/src/main/res/drawable/ic_launcher_foreground.xml` and the color in `res/values/colors.xml`.
+**Built with:** Kotlin, Jetpack Compose with Material 3, Google ML Kit (Document Scanner and Text Recognition), and Android Gradle Plugin 9.3.
 
-## Good to know
+## Roadmap
 
-- The scanner and the text reader come from Google Play services, so the app needs a phone with Google Play. The first use of each needs internet once so Play services can download them.
-- Scans are stored in the app's private storage. Uninstalling the app deletes them, so export anything you want to keep.
-- Not built yet: signatures on documents and password-protected PDFs.
+- [ ] Sign documents with a drawn signature
+- [ ] Password-protected PDFs
+- [ ] A built-in PDF reader
+- [ ] Release on Google Play
+
+Ideas and bug reports are welcome in [Issues](../../issues).
+
+## Contributing
+
+This is a personal project, but pull requests are welcome. For anything bigger than a small fix, open an issue first so we can talk it over.
+
+## License
+
+<!-- Pick a license before publishing. MIT is a common, simple choice: GitHub can add it for you
+     via "Add file > Create new file", typing LICENSE as the name, and choosing a template.
+     Without a license, nobody else may legally reuse this code. -->
+No license has been chosen yet.
