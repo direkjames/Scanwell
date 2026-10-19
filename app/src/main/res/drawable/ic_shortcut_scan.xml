@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon for the "Scan" shortcut shown when you long-press the app icon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#4F46E5"
+        android:pathData="M7,3 h7 l4,4 v12 a2,2 0 0 1 -2,2 h-9 a2,2 0 0 1 -2,-2 v-14 a2,2 0 0 1 2,-2 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M8,11 h8 v1.5 h-8 z M8,14.5 h8 v1.5 h-8 z" />
+</vector>

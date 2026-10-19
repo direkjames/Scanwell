@@ -1,0 +1,8 @@
+<resources>
+    <!-- Window theme shown for a split second while the app starts. It uses the app's own
+         background color so there is no white flash before the real screen appears.
+         The real colors come from ui/theme/Theme.kt. -->
+    <style name="Theme.Scanwell" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+</resources>
