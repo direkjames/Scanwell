@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App icon artwork: a sheet of paper with a folded corner. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,30 h20 l12,12 v34 a2,2 0 0 1 -2,2 h-30 a2,2 0 0 1 -2,-2 v-44 a2,2 0 0 1 2,-2 z" />
+    <path
+        android:fillColor="#C7D2FE"
+        android:pathData="M60,30 v10 a2,2 0 0 0 2,2 h10 z" />
+    <path
+        android:fillColor="#4F46E5"
+        android:pathData="M44,50 h20 v3 h-20 z M44,58 h20 v3 h-20 z M44,66 h13 v3 h-13 z" />
+</vector>

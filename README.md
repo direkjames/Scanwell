@@ -17,6 +17,8 @@ Scanwell turns your phone into a scanner. Capture paper documents, save them as 
 
 - **Scan:** automatic edge detection, cropping and image filters. You can also import photos from your gallery.
 - **Export:** share or save as PDF or JPEG, with no watermark. Choose from three PDF sizes for email and upload limits.
+- **Password-protect PDFs:** lock any scan or any PDF on your phone with a password (AES-256). Optionally also lock editing and copying. You can open protected PDFs and remove a password you know.
+- **Compress PDFs:** shrink a PDF to Low, Medium or High and see the before and after size. Your original is never changed.
 - **Text recognition:** copy or share the text on any page.
 - **Search:** find a scan by its name or by any word printed inside it.
 - **Organize:** rename scans and file them in folders.
@@ -41,6 +43,7 @@ To install it, open the APK on your phone. If Android asks, allow installs from 
 - Your scans are stored only on your phone, in the app's private storage.
 - Scanwell has no accounts, no ads, no analytics of its own, and no servers.
 - Scanning and text recognition run on the phone through [Google ML Kit](https://developers.google.com/ml-kit). ML Kit sends Google some technical information, such as the device model and performance data, for diagnostics. See Google's [ML Kit data disclosure](https://developers.google.com/ml-kit/android-data-disclosure).
+- Passwords are used to lock or unlock a file and then forgotten. They are never stored, logged or sent anywhere, and a forgotten password cannot be recovered.
 - Uninstalling Scanwell deletes your scans, so export anything you want to keep.
 
 ## Build it yourself
@@ -61,7 +64,7 @@ To build a release APK, choose **Build > Generate Signed Bundle/APK**, select **
 
 ### Tests
 
-The PDF writer and the helper code have unit tests that run on your computer:
+The PDF writer, compression levels, password rules and the helper code have unit tests that run on your computer:
 
 ```bash
 ./gradlew test
@@ -76,18 +79,19 @@ Or right-click `app/src/test/java/com/scanwell/app` in Android Studio and choose
 | `ui/` | The screens, built with Jetpack Compose |
 | `MainViewModel.kt` | The app's logic: saving, exporting and reading text |
 | `data/` | Stores each scan as JPEG pages plus a small JSON file |
-| `pdf/` | A small PDF writer that places the JPEG pages into the PDF as they are, so files stay small and lose no quality |
+| `pdf/` | A small PDF writer that places the JPEG pages into the PDF as they are, plus `PdfTools`, which uses PDFBox to encrypt, unlock and compress PDFs on the phone |
 | `scan/` | Imports scanned pages, builds ID card pages, reads text |
 | `share/` | Shares files with other apps |
 
 All paths are under `app/src/main/java/com/scanwell/app/`.
 
-**Built with:** Kotlin, Jetpack Compose with Material 3, Google ML Kit (Document Scanner and Text Recognition), and Android Gradle Plugin 9.3.
+**Built with:** Kotlin, Jetpack Compose with Material 3, Google ML Kit (Document Scanner and Text Recognition), PDFBox for Android (PDF encryption and compression), and Android Gradle Plugin 9.3.
 
 ## Roadmap
 
 - [ ] Sign documents with a drawn signature
-- [ ] Password-protected PDFs
+- [x] Password-protected PDFs
+- [x] PDF compression
 - [ ] A built-in PDF reader
 - [ ] Release on Google Play
 
