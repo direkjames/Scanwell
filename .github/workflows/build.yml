@@ -16,9 +16,8 @@ jobs:
           distribution: temurin
           java-version: 25
 
-      - uses: android-actions/setup-android@v3
-
-      # local.properties is not committed; point Gradle at the CI machine's Android SDK instead.
+      # GitHub's runners already include the Android SDK. local.properties is not committed, so
+      # point Gradle at that SDK.
       - name: Point Gradle at the Android SDK
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
 
