@@ -1,42 +1,38 @@
+<div align="center">
+
 # Scanwell
 
 **A document scanner for Android. No watermark, no page limit, no ads, no account.**
 
+![Status: Shipped](https://img.shields.io/badge/status-shipped-brightgreen)
+![Version 2.0](https://img.shields.io/badge/version-2.0-4f46e5)
+![Platform: Android 8+](https://img.shields.io/badge/platform-Android%208%2B-3ddc84)
+![No ads](https://img.shields.io/badge/ads-none-0891b2)
+
+<img src="docs/screenshots/hero-1920x1080.png" alt="Illustration of a paper invoice being scanned: raw on the left, clean on the right" width="880">
+
+<img src="docs/screenshots/hero-1680x1050.png" alt="Illustration of Scanwell's main features: password protection, compression, text recognition, ID card mode, search and quick scan" width="880">
+
+## About
+
 Scanwell turns your phone into a scanner. Capture paper documents, save them as clean PDFs, copy the text out of them, and keep everything organized on your phone.
 
-<!-- Screenshots: put 3 or 4 phone screenshots in a docs/screenshots folder, then uncomment the line below. -->
-<!--
-<p align="center">
-  <img src="docs/screenshots/library.png" width="220" alt="Library">
-  <img src="docs/screenshots/document.png" width="220" alt="A scanned document">
-  <img src="docs/screenshots/text.png" width="220" alt="Text read from a scan">
-</p>
--->
+*The images above are illustrations, not screenshots.*
+
+</div>
 
 ## Features
 
 - **Scan:** automatic edge detection, cropping and image filters. You can also import photos from your gallery.
 - **Export:** share or save as PDF or JPEG, with no watermark. Choose from three PDF sizes for email and upload limits.
-- **Password-protect PDFs:** lock any scan or any PDF on your phone with a password (AES-256). Optionally also lock editing and copying. You can open protected PDFs and remove a password you know.
-- **Compress PDFs:** shrink a PDF to Low, Medium or High and see the before and after size. Your original is never changed.
+- **Password-protect PDFs:** lock any scan, or any PDF on your phone, with a password (AES-256). You can also lock editing and copying. You can open protected PDFs and remove a password you know.
+- **Compress PDFs:** shrink a PDF to Low, Medium or High and see the size before and after. Your original is never changed.
 - **Text recognition:** copy or share the text on any page.
 - **Search:** find a scan by its name or by any word printed inside it.
 - **Organize:** rename scans and file them in folders.
 - **Edit pages:** add more pages to a scan, reorder them, or delete them.
 - **ID card mode:** scan the front and back of a card onto one A4 page, ready to print.
-- **Quick scan:** long-press the app icon and choose **Scan** to go straight to the camera.
-
-## Download
-
-Get the latest APK from the [Releases](../../releases) page.
-
-To install it, open the APK on your phone. If Android asks, allow installs from the app you opened it with. Google Play Protect may warn you because the app isn't on the Play Store yet; choose to install anyway.
-
-**Requirements**
-- Android 8.0 or newer
-- Google Play services, which handles the scanner and the text reader
-- At least 1.7 GB of RAM
-- Internet the first time you scan or read text, while Google Play services downloads those parts. After that, Scanwell works offline.
+- **Quick scan:** press and hold the app icon and choose **Scan** to go straight to the camera.
 
 ## Privacy
 
@@ -46,64 +42,32 @@ To install it, open the APK on your phone. If Android asks, allow installs from 
 - Passwords are used to lock or unlock a file and then forgotten. They are never stored, logged or sent anywhere, and a forgotten password cannot be recovered.
 - Uninstalling Scanwell deletes your scans, so export anything you want to keep.
 
-## Build it yourself
+## Getting started
 
-You need [Android Studio](https://developer.android.com/studio) (Quail 2 or newer) and an Android phone with Google Play.
+1. Download the latest APK from the [Releases page](https://github.com/direkjames/Scanwell/releases/latest) on your phone.
+2. Open the file. If Android asks, allow installs from the app you opened it with. Google Play Protect may warn you because the app is not on the Play Store yet. Choose to install anyway.
+3. Open Scanwell and press **Scan**.
+4. Save your scan as a PDF or JPEG, or tap a tool to lock or compress a PDF.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/Scanwell.git
-   ```
-2. In Android Studio, choose **Open** and select the `Scanwell` folder.
-3. Wait for Gradle sync to finish. The first sync downloads several gigabytes and can take 10 to 20 minutes.
-4. Turn on USB debugging on your phone, plug it in, and press **Run**.
+## Requirements
 
-Use a real phone rather than the emulator, since the scanner needs a real camera.
+- Android 8.0 or newer
+- Google Play services, which handles the scanner and the text reader
+- At least 1.7 GB of RAM
+- Internet the first time you scan or read text, while Google Play services downloads those parts. After that, Scanwell works offline.
 
-To build a release APK, choose **Build > Generate Signed Bundle/APK**, select **APK**, and sign it with your own key.
+## Built with
 
-### Tests
+- Kotlin and Jetpack Compose with Material 3
+- Google ML Kit (Document Scanner and Text Recognition)
+- PDFBox for Android, for PDF encryption and compression
 
-The PDF writer, compression levels, password rules and the helper code have unit tests that run on your computer:
+Want to build it yourself? See [Developing Scanwell](docs/DEVELOPING.md).
 
-```bash
-./gradlew test
-```
+## Status
 
-Or right-click `app/src/test/java/com/scanwell/app` in Android Studio and choose **Run Tests**.
+Shipped.
 
-## How it works
+## Credits / License
 
-| Folder | What it does |
-| --- | --- |
-| `ui/` | The screens, built with Jetpack Compose |
-| `MainViewModel.kt` | The app's logic: saving, exporting and reading text |
-| `data/` | Stores each scan as JPEG pages plus a small JSON file |
-| `pdf/` | A small PDF writer that places the JPEG pages into the PDF as they are, plus `PdfTools`, which uses PDFBox to encrypt, unlock and compress PDFs on the phone |
-| `scan/` | Imports scanned pages, builds ID card pages, reads text |
-| `share/` | Shares files with other apps |
-
-All paths are under `app/src/main/java/com/scanwell/app/`.
-
-**Built with:** Kotlin, Jetpack Compose with Material 3, Google ML Kit (Document Scanner and Text Recognition), PDFBox for Android (PDF encryption and compression), and Android Gradle Plugin 9.3.
-
-## Roadmap
-
-- [ ] Sign documents with a drawn signature
-- [x] Password-protected PDFs
-- [x] PDF compression
-- [ ] A built-in PDF reader
-- [ ] Release on Google Play
-
-Ideas and bug reports are welcome in [Issues](../../issues).
-
-## Contributing
-
-This is a personal project, but pull requests are welcome. For anything bigger than a small fix, open an issue first so we can talk it over.
-
-## License
-
-<!-- Pick a license before publishing. MIT is a common, simple choice: GitHub can add it for you
-     via "Add file > Create new file", typing LICENSE as the name, and choosing a template.
-     Without a license, nobody else may legally reuse this code. -->
-No license has been chosen yet.
+Made by [direkjames](https://github.com/direkjames). See [LICENSE](LICENSE).
